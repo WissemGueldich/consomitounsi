@@ -7,7 +7,6 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pidv.consomiTounsi.webservices.model.Rayon;
-import com.pidv.consomiTounsi.webservices.repository.RayonRepository;
+import tn.esprit.consomitounsi.exception.ResourceNotFoundException;
+import tn.esprit.consomitounsi.modal.Rayon;
+import tn.esprit.consomitounsi.repository.RayonRepository;
+
+
 
 @RestController
 @RequestMapping("/api/v1")

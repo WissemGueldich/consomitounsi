@@ -47,5 +47,31 @@ public class UserController {
 		return userService.deleteUser(id);
 
 	}
+	@GetMapping(value = "/login")
+	private ResponseEntity<?> login (@RequestBody ObjectHandler oj ){
+		System.out.println(oj.getLogin()+oj.getPassword());
+		return userService.login(oj.getLogin(),oj.getPassword());
+
+	}
+	static class ObjectHandler{
+		private String password;
+		private String login;
+		
+		public String getLogin() {
+			return login;
+		}
+		public void setLogin(String login) {
+			this.login = login;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		
+	}
 
 }
+
+

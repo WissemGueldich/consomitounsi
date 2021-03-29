@@ -7,7 +7,6 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pidv.consomiTounsi.webservices.model.Stock;
-import com.pidv.consomiTounsi.webservices.repository.StockRepository;
+import tn.esprit.consomitounsi.exception.ResourceNotFoundException;
+import tn.esprit.consomitounsi.modal.Stock;
+import tn.esprit.consomitounsi.repository.StockRepository;
+
+
+
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -55,7 +59,7 @@ public class StockController {
 		Stock stock = stockRepository.findById(stockId)
 				.orElseThrow(() -> new ResourceNotFoundException("stock not found for this id :: " + stockId));
 
-		stock.setProductNumber(stockDetails.getProductNumber());
+		stock.setStockNumber(stockDetails.getStockNumber());
 		stock.setStockName(stockDetails.getStockName());
 		stock.setStockType(stockDetails.getStockType());
 		stock.setStockCategory(stockDetails.getStockCategory());
