@@ -1,9 +1,15 @@
 package tn.esprit.consomitounsi.modal;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class User {
@@ -21,6 +27,18 @@ public class User {
 	private String password;
 	private String location;
 	private String role;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private Set<Participations> participations;
+
+	public Set<Participations> getParticipations() {
+		return participations;
+	}
+
+	public void setParticipations(Set<Participations> participations) {
+		this.participations = participations;
+	}
 
 	public String getBirthday() {
 		return birthday;
