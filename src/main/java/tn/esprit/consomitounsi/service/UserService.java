@@ -17,7 +17,7 @@ public class UserService {
 		if (userRepository.findByEmail(user.getEmail()) != null) {
 			return new ResponseEntity<>("Email already taken !", HttpStatus.FOUND);
 		} else {
-			if (userRepository.findByUserName(user.getUserName()) != null) {
+			if (userRepository.findByUsername(user.getUsername()) != null) {
 				return new ResponseEntity<>("UserName already taken !", HttpStatus.FOUND);
 			}
 		}
@@ -53,7 +53,7 @@ public class UserService {
 			
 		}
 		try {
-			user = userRepository.findByUserName(login);
+			user = userRepository.findByUsername(login);
 			if (user.getPassword().equals(password)) {
 				return new ResponseEntity<>(user, HttpStatus.OK);
 			}

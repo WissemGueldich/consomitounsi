@@ -4,6 +4,7 @@ package tn.esprit.consomitounsi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,12 @@ import tn.esprit.consomitounsi.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private PasswordEncoder encoder;
 	@PostMapping(value = "/adduser")
 	private ResponseEntity<?> addUser (@RequestBody User user){
+		
+		user.setPassword(encoder.encode(user.getPassword()));
 		return userService.addUser(user);
 	}
 	@GetMapping(value="/getusers")
@@ -49,7 +53,6 @@ public class UserController {
 	}
 	@GetMapping(value = "/login")
 	private ResponseEntity<?> login (@RequestBody ObjectHandler oj ){
-		System.out.println(oj.getLogin()+oj.getPassword());
 		return userService.login(oj.getLogin(),oj.getPassword());
 
 	}
