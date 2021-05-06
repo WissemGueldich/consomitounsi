@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,27 +24,28 @@ import tn.esprit.consomitounsi.modal.Rayon;
 import tn.esprit.consomitounsi.repository.RayonRepository;
 
 
-
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(value="/rayons")
 public class RayonController {
 	@Autowired
 	private RayonRepository rayonRepository;
 	
 	// create get all rayons api
 	
-	@GetMapping("/rayons")
+	@GetMapping(value="/getall")
 	public List<Rayon> getAllRayons(){
 		return rayonRepository.findAll();
 	}
 	// create rayon
-	@PostMapping("/rayons")
+	@PostMapping("/add")
 	public Rayon createrayon(@Validated @RequestBody Rayon rayon) {
 		return rayonRepository.save(rayon);
 	}
 	
+	
 	// get rayon by id
-	@GetMapping("/rayons/{id}")
+	@GetMapping("/getone/{id}")
 	public ResponseEntity<Rayon> getRayonById(@PathVariable(value = "id") Long rayonId)
 			throws ResourceNotFoundException {
 		Rayon rayon = rayonRepository.findById(rayonId)
@@ -51,7 +53,7 @@ public class RayonController {
 		return ResponseEntity.ok().body(rayon);
 	}
 	// update rayon
-	@PutMapping("/rayons/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<Rayon> updateRayon(@PathVariable(value = "id") Long rayonId,
 			@Validated @RequestBody Rayon rayonDetails) throws ResourceNotFoundException {
 		Rayon rayon = rayonRepository.findById(rayonId)
@@ -59,12 +61,14 @@ public class RayonController {
 
 		rayon.setRayonNumber(rayonDetails.getRayonNumber());
 		rayon.setRayonName(rayonDetails.getRayonName());
-		rayon.setCategory(rayonDetails.getCategory());
+		rayon.setRayonType(rayonDetails.getRayonType());
+		rayon.setRayonCategory(rayonDetails.getRayonCategory());
+		rayon.setStocks(rayonDetails.getStocks());
 		final Rayon updatedRayon = rayonRepository.save(rayon);
 		return ResponseEntity.ok(updatedRayon);
 	}
 	// delete rayon 
-	@DeleteMapping("/rayons/{id}")
+	@DeleteMapping("/delete/{id}")
 	public Map<String, Boolean> deleterayon(@PathVariable(value = "id") Long rayonId)
 			throws ResourceNotFoundException {
 		Rayon rayon = rayonRepository.findById(rayonId)

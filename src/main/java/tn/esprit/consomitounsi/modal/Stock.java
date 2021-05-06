@@ -2,10 +2,15 @@ package tn.esprit.consomitounsi.modal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "stocks")
@@ -14,54 +19,72 @@ public class Stock {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(name = "Product_number")
-	private int ProductNumber;
+	private int productNumber;
 	@Column(name = "stock_name")
-	private String StockName;
+	private String stockName;
 	@Column(name = "stock_category")
-	private String StockCategory;
+	private String stockCategory;
 	@Column(name = "stock_type")
-	private String StockType;
+	private String stockType;
 	
+	@JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "rayon_id")
+	private Rayon rayon;
 	
+	public Rayon getRayon() {
+		return rayon;
+	}
+
+	public void setRayon(Rayon rayon) {
+		this.rayon = rayon;
+	}
 	public Stock() {
 		super();
 	}
-	public Stock(long id, int productNumber, String stockName, String stockCategory, String stockType) {
-		super();
-		this.id = id;
-		this.ProductNumber = productNumber;
-		StockName = stockName;
-		StockCategory = stockCategory;
-		StockType = stockType;
-	}
+	
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public int getStockNumber() {
-		return ProductNumber;
+	public int getProductNumber() {
+		return this.productNumber;
 	}
-	public void setStockNumber(int stockNumber) {
-		ProductNumber = stockNumber;
+	public void setProductNumber(int productNumber) {
+		this.productNumber = productNumber;
 	}
 	public String getStockName() {
-		return StockName;
+		return stockName;
 	}
+	
+
+	public Stock(long id, int productNumber, String stockName, String stockCategory, String stockType, Rayon rayon) {
+		super();
+		this.id = id;
+		this.productNumber = productNumber;
+		this.stockName = stockName;
+		this.stockCategory = stockCategory;
+		this.stockType = stockType;
+		this.rayon = rayon;
+	}
+
 	public void setStockName(String stockName) {
-		StockName = stockName;
+		this.stockName = stockName;
 	}
 	public String getStockCategory() {
-		return StockCategory;
+		return stockCategory;
 	}
 	public void setStockCategory(String stockCategory) {
-		StockCategory = stockCategory;
+		this.stockCategory = stockCategory;
 	}
 	public String getStockType() {
-		return StockType;
+		return stockType;
 	}
 	public void setStockType(String stockType) {
-		StockType = stockType;
+		this.stockType = stockType;
 	}
+	
+	
 }
