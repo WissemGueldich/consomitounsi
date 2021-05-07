@@ -1,36 +1,36 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Consomi Tounsi</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+        <a href="/home" class="nav-link" routerLink="home"><img src="assets/images/ctoun.png" width="200" height="100"></a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a href="/home" class="nav-link" routerLink="home"><h2>Home</h2></a>
       </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin"><h2>Admin Board</h2></a>
+      </li>
+      
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a href="/register" class="nav-link" routerLink="register"><h2>Sign Up</h2></a>
       </li>
       <li class="nav-item">
-        <a href="/invoices" class="nav-link" routerLink="invoices">invoices</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
+        <a href="/login" class="nav-link" routerLink="login"><h2>Login</h2></a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        <a href="/profile" class="nav-link" routerLink="profile"><h3>{{ username }}</h3></a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
+        <a href="/invoices" class="nav-link" routerLink="invoices"><h2>invoices</h2></a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()"><h2>LogOut</h2></a>
       </li>
     </ul>
   </nav>
