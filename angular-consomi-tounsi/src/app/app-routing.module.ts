@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,6 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'invoices', component: ListInvoicesComponent},
   {path: 'addinvoice', component: AddInvoiceComponent},
   {path: 'editinvoice/:id', component: AddInvoiceComponent},
@@ -34,7 +32,7 @@ const routes: Routes = [
   {path: 'stock/add', component: AddStockComponent},
   {path: 'stock/update/:id', component: AddStockComponent},
   
-  {path: '', redirectTo: '/invoices', pathMatch: 'full'}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

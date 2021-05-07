@@ -32,6 +32,16 @@ import tn.esprit.consomitounsi.repository.UserRepository;
 import tn.esprit.consomitounsi.security.jwt.JwtUtils;
 import tn.esprit.consomitounsi.security.services.UserDetailsImpl;
 
+
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -68,7 +78,11 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
-												 userDetails.getEmail(), 
+												 userDetails.getEmail(),
+												 userDetails.getFirstName(),
+												 userDetails.getLastName(),
+												 userDetails.getAddresse(),
+												 userDetails.getPhone(),
 												 roles));
 	}
 
@@ -86,10 +100,16 @@ public class AuthController {
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
-		// Create new user's account
+		// Create new user account
 		User user = new User(signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()));
+		 	user.setPhone(signUpRequest.getPhone());
+	        user.setAddresse(signUpRequest.getAddresse());
+	        user.setCreated(new Date());
+	        user.setUpdated(new Date());
+	        user.setFirstName(signUpRequest.getFirstName());
+	        user.setLastName(signUpRequest.getLastName());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
