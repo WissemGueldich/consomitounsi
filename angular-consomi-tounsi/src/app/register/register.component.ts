@@ -13,7 +13,8 @@ export class RegisterComponent implements OnInit {
     password: null,
     firstName:null,
     lastName:null,
-    phone:null
+    phone:null,
+    adresse:null
   };
   isSuccessful = false;
   isSignUpFailed = false;
