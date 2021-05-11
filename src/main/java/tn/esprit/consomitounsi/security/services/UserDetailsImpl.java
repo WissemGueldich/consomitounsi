@@ -1,6 +1,7 @@
 package tn.esprit.consomitounsi.security.services;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -10,6 +11,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import tn.esprit.consomitounsi.modal.User;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
@@ -28,15 +31,18 @@ public class UserDetailsImpl implements UserDetails {
 	private String addresse;
 	
 	private Long phone;
-
-
-
-	@JsonIgnore
+	
+	@JsonFormat(pattern = "yyyy/MM/dd")
+	private Date created;
+	
+	@JsonFormat(pattern = "yyyy/MM/dd")
+	private Date updated;
+	
 	private String password;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String email, String password,String firstName,String lastName,String addresse,Long phone,
+	public UserDetailsImpl(Long id, String username, String email, String password,String firstName,String lastName,String addresse,Long phone,Date created, Date updated,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
@@ -47,8 +53,26 @@ public class UserDetailsImpl implements UserDetails {
 		this.lastName=lastName;
 		this.addresse=addresse;
 		this.phone=phone;
+		this.created=created;
+		this.updated=updated;
+		
 
+	}
 
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 
 	public String getFirstName() {
@@ -117,6 +141,8 @@ public class UserDetailsImpl implements UserDetails {
 				user.getLastName(),
 				user.getAddresse(),
 				user.getPhone(),
+				user.getCreated(),
+				user.getUpdated(),
 				authorities);
 	}
 

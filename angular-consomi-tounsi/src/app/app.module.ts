@@ -12,7 +12,7 @@ import { AddInvoiceComponent } from './components/add-invoice/add-invoice.compon
 
 import { AddStockComponent } from './components/add-stock/add-stock.component';
 import { AddRayonComponent } from './components/add-rayon/add-rayon.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -22,6 +22,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+
 
 const routers: Routes = [
   {path: 'invoices', component: ListInvoicesComponent},
@@ -59,9 +60,10 @@ const routers: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routers),
-    AppRoutingModule,
-    FormsModule
+    AppRoutingModule
+    
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

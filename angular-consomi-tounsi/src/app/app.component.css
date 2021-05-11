@@ -2,3 +2,6 @@
     position: relative;
     vertical-align: baseline;
 }
+#app{
+    width: 100%;
+}

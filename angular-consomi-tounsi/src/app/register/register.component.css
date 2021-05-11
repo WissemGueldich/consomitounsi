@@ -7,19 +7,26 @@
     font-size: 20px;
 }
 .reg-button{
-    background-color: rgb(56, 56, 56);
-    font-size: large;
-    color: gray;
+    color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #40b123;
+  width: 30%;
 }
 
 .reg-button:hover{
-    background-color: rgb(94, 31, 31);
-    font-size: large;
-    color: gray;
+    background-color: #29c702;
+
 }
 .reg-button:active{
     background-color: rgb(255, 0, 0);
     font-size: large;
     color: rgb(43, 43, 43);
     
+}
+input{
+    font-size: medium;
+    text-align: center;
 }

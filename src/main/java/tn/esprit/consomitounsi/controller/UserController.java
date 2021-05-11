@@ -43,6 +43,7 @@ public class UserController {
 	}
 	@PutMapping(value="/updateuser")
 	private ResponseEntity<?> updateUser (@RequestBody User user ){
+		System.out.println(user.toString());
 		return userService.updateUser(user);
 
 	}
@@ -52,24 +53,6 @@ public class UserController {
 
 	}
 
-	static class ObjectHandler{
-		private String password;
-		private String login;
-		
-		public String getLogin() {
-			return login;
-		}
-		public void setLogin(String login) {
-			this.login = login;
-		}
-		public String getPassword() {
-			return password;
-		}
-		public void setPassword(String password) {
-			this.password = password;
-		}
-		
-	}
 
 }
 
