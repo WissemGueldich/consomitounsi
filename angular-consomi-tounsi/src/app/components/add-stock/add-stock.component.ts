@@ -1,6 +1,8 @@
 import { Stock } from './../../models/stock';
+import { Rayon } from './../../models/rayon';
 import { Component, OnInit } from '@angular/core';
 import { StockService } from 'src/app/services/stock.service';
+import { RayonService } from 'src/app/services/rayon.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -10,21 +12,29 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-stock.component.css']
 })
 export class AddStockComponent implements OnInit {
+  rayons: Rayon[] = [];
 
   stock: Stock = new Stock();
 
   constructor(private _stockService: StockService,
               private _router: Router,
-              private _activatedRoute: ActivatedRoute) { }
+              private _activatedRoute: ActivatedRoute,
+              private _rayonService: RayonService) { }
+              
 
   ngOnInit(): void {
+    
     const isIdPresent = this._activatedRoute.snapshot.paramMap.has('id');
     if (isIdPresent) {
         const id = +this._activatedRoute.snapshot.paramMap.get('id');
         this._stockService.getStock(id).subscribe(
           data => this.stock = data 
         )
+        
     }
+    this._rayonService.getRayons().subscribe(
+      data => this.rayons = data
+    )
   }
 
   saveStock() {
