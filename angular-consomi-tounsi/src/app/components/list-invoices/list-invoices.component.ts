@@ -41,9 +41,9 @@ export class ListInvoicesComponent implements OnInit {
     return invoices.filter((e) => {
       return e.invoiceDate.toLowerCase().includes(this.filters.keyword.toLowerCase());
     }).sort((a, b) => {
-      if (this.filters.sortBy === 'Name') {
-        return a.invoiceDate.toLowerCase() < b.invoiceDate.toLowerCase() ? -1: 1;
-      }else if(this.filters.sortBy === 'Amount') {
+      if (this.filters.sortBy === 'date') {
+        return a.invoiceDate.toLowerCase() > b.invoiceDate.toLowerCase() ? -1: 1;
+      }else if(this.filters.sortBy === 'id') {
         return a.id > b.id ? -1: 1;
       }
     })
